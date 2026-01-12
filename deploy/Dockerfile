@@ -27,11 +27,8 @@ RUN npm ci --omit=dev
 # Copy built React app
 COPY --from=builder /app/website/dist ./website/dist
 
-# Copy server source (tsx runs TypeScript directly)
+# Copy server source (tsx runs TypeScript directly, includes db/)
 COPY --from=builder /app/server ./server
-
-# Copy shared db code
-COPY --from=builder /app/src ./src
 
 # Copy drizzle config for migrations
 COPY --from=builder /app/drizzle.config.ts ./

@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
 import { Router } from "express";
 import jwt from "jsonwebtoken";
-import { getDbInstance, schema } from "../../src/db/index.js";
+import { getDbInstance, schema } from "../db/index.js";
 import { authMiddleware, JWT_SECRET } from "../middleware/auth.js";
 
 const router = Router();

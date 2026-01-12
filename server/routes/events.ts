@@ -1,6 +1,6 @@
 import { and, desc, eq, sql } from "drizzle-orm";
 import { Router } from "express";
-import { getDbInstance, schema } from "../../src/db/index.js";
+import { getDbInstance, schema } from "../db/index.js";
 import { authMiddleware } from "../middleware/auth.js";
 
 const router = Router();
