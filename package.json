@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run dev:website\" \"npm run dev:server\"",
+    "dev": "docker compose up -d && trap 'docker compose stop' EXIT && concurrently \"npm run dev:website\" \"npm run dev:server\"",
     "dev:website": "vite --config website/vite.config.ts",
     "dev:server": "tsx watch server/index.ts",
     "build": "tsc -b && vite build --config website/vite.config.ts",
