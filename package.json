@@ -8,6 +8,7 @@
     "dev:website": "vite --config website/vite.config.ts",
     "dev:server": "tsx watch server/index.ts",
     "build": "tsc -b && vite build --config website/vite.config.ts",
+    "build:server": "tsc -p server/tsconfig.build.json",
     "start": "node dist/server/index.js",
     "preview": "vite preview --config website/vite.config.ts",
     "lint": "biome lint --write .",

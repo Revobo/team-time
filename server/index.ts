@@ -26,10 +26,11 @@ app.use("/api/events", eventsRoutes);
 
 // In production, serve the React app
 if (process.env.NODE_ENV === "production") {
-  const staticPath = path.join(__dirname, "../website/dist");
+  // In production, server runs from /app/dist/server/, website is at /app/website/dist/
+  const staticPath = path.join(__dirname, "../../website/dist");
   app.use(express.static(staticPath));
 
-  app.get("*", (_req, res) => {
+  app.get("/{*path}", (_req, res) => {
     res.sendFile(path.join(staticPath, "index.html"));
   });
 }

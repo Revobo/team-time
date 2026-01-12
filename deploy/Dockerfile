@@ -13,7 +13,7 @@ RUN npm ci
 COPY . .
 
 # Build the React app and compile server
-RUN npm run build
+RUN npm run build && npm run build:server
 
 # Stage 2: Production
 FROM node:22-alpine AS production
@@ -27,11 +27,10 @@ RUN npm ci --omit=dev
 # Copy built React app
 COPY --from=builder /app/website/dist ./website/dist
 
-# Copy server source (tsx runs TypeScript directly, includes db/)
-COPY --from=builder /app/server ./server
+# Copy compiled server
+COPY --from=builder /app/dist/server ./dist/server
 
-# Copy drizzle config for migrations
-COPY --from=builder /app/drizzle.config.ts ./
+# Copy drizzle migrations
 COPY --from=builder /app/drizzle ./drizzle
 
 # Set environment
@@ -42,4 +41,4 @@ ENV PORT=8080
 EXPOSE 8080
 
 # Start the server
-CMD ["node", "--import", "tsx", "server/index.ts"]
+CMD ["node", "dist/server/index.js"]
