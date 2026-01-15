@@ -7,6 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
+import { proposeTimeDialogTestIds } from "@testIds/proposeTimeDialog";
 import { useProposeTime } from "../hooks/useEvents";
 
 interface ProposeTimeDialogProps {
@@ -43,8 +44,16 @@ export function ProposeTimeDialog({
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
-      <DialogTitle>Propose a Time</DialogTitle>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      maxWidth="xs"
+      fullWidth
+      data-testid={proposeTimeDialogTestIds.dialog}
+    >
+      <DialogTitle data-testid={proposeTimeDialogTestIds.title}>
+        Propose a Time
+      </DialogTitle>
       <DialogContent>
         <TextField
           type="datetime-local"
@@ -55,14 +64,21 @@ export function ProposeTimeDialog({
           inputProps={{
             min: new Date().toISOString().slice(0, 16),
           }}
+          data-testid={proposeTimeDialogTestIds.datetimeInput}
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
+        <Button
+          onClick={handleClose}
+          data-testid={proposeTimeDialogTestIds.cancelButton}
+        >
+          Cancel
+        </Button>
         <Button
           onClick={handleSubmit}
           variant="contained"
           disabled={!datetime || proposeMutation.isPending}
+          data-testid={proposeTimeDialogTestIds.proposeButton}
         >
           Propose
         </Button>

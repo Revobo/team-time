@@ -14,6 +14,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
+import { createEventDialogTestIds } from "@testIds/CreateEventDialogTestIds";
 import { useCreateEvent } from "../hooks/useEvents";
 
 interface CreateEventDialogProps {
@@ -54,7 +55,7 @@ export function CreateEventDialog({ open, onClose }: CreateEventDialogProps) {
           resetForm();
           onClose();
         },
-      },
+      }
     );
   };
 
@@ -82,8 +83,16 @@ export function CreateEventDialog({ open, onClose }: CreateEventDialogProps) {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-      <DialogTitle>Create Event</DialogTitle>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      maxWidth="sm"
+      fullWidth
+      data-testid={createEventDialogTestIds.dialog}
+    >
+      <DialogTitle data-testid={createEventDialogTestIds.title}>
+        Create Event
+      </DialogTitle>
       <DialogContent>
         <TextField
           label="Event Name"
@@ -92,6 +101,7 @@ export function CreateEventDialog({ open, onClose }: CreateEventDialogProps) {
           onChange={(e) => setName(e.target.value)}
           sx={{ mt: 1, mb: 2 }}
           required
+          data-testid={createEventDialogTestIds.nameInput}
         />
         <TextField
           label="Description (optional)"
@@ -101,6 +111,7 @@ export function CreateEventDialog({ open, onClose }: CreateEventDialogProps) {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           sx={{ mb: 2 }}
+          data-testid={createEventDialogTestIds.descriptionInput}
         />
 
         <Box sx={{ display: "flex", gap: 1, mb: 1 }}>
@@ -112,22 +123,29 @@ export function CreateEventDialog({ open, onClose }: CreateEventDialogProps) {
             inputProps={{
               min: new Date().toISOString().slice(0, 16),
             }}
+            data-testid={createEventDialogTestIds.datetimeInput}
           />
-          <IconButton onClick={handleAddTime} disabled={!newTime}>
+          <IconButton
+            onClick={handleAddTime}
+            disabled={!newTime}
+            data-testid={createEventDialogTestIds.addTimeButton}
+          >
             <AddIcon />
           </IconButton>
         </Box>
 
         {proposedTimes.length > 0 && (
-          <List dense>
+          <List dense data-testid={createEventDialogTestIds.timesList}>
             {proposedTimes.map((time, index) => (
               <ListItem
                 key={time}
+                data-testid={createEventDialogTestIds.timeItem}
                 secondaryAction={
                   <IconButton
                     edge="end"
                     size="small"
                     onClick={() => handleRemoveTime(index)}
+                    data-testid={createEventDialogTestIds.removeTimeButton}
                   >
                     <DeleteIcon fontSize="small" />
                   </IconButton>
@@ -140,13 +158,19 @@ export function CreateEventDialog({ open, onClose }: CreateEventDialogProps) {
         )}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
+        <Button
+          onClick={handleClose}
+          data-testid={createEventDialogTestIds.cancelButton}
+        >
+          Cancel
+        </Button>
         <Button
           onClick={handleSubmit}
           variant="contained"
           disabled={
             !name || proposedTimes.length === 0 || createMutation.isPending
           }
+          data-testid={createEventDialogTestIds.createButton}
         >
           Create
         </Button>

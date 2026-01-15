@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { eventListTestIds } from "@testIds/eventListTestIds";
 import { useEvents } from "../hooks/useEvents";
 import { EventCard } from "./EventCard";
 
@@ -22,7 +23,10 @@ export function EventList({ onSelectEvent, onCreateEvent }: EventListProps) {
 
   if (isLoading) {
     return (
-      <Box sx={{ display: "flex", justifyContent: "center", py: 8 }}>
+      <Box
+        sx={{ display: "flex", justifyContent: "center", py: 8 }}
+        data-testid={eventListTestIds.loading}
+      >
         <CircularProgress />
       </Box>
     );
@@ -30,14 +34,17 @@ export function EventList({ onSelectEvent, onCreateEvent }: EventListProps) {
 
   if (error) {
     return (
-      <Box sx={{ p: 2 }}>
+      <Box sx={{ p: 2 }} data-testid={eventListTestIds.error}>
         <Typography color="error">Failed to load events</Typography>
       </Box>
     );
   }
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
+    <Box
+      sx={{ display: "flex", flexDirection: "column", height: "100%" }}
+      data-testid={eventListTestIds.container}
+    >
       <Box
         sx={{
           p: 2,
@@ -47,23 +54,33 @@ export function EventList({ onSelectEvent, onCreateEvent }: EventListProps) {
           justifyContent: "space-between",
           alignItems: "center",
         }}
+        data-testid={eventListTestIds.header}
       >
-        <Typography variant="h6">Events</Typography>
+        <Typography variant="h6" data-testid={eventListTestIds.title}>
+          Events
+        </Typography>
         <FormControlLabel
           control={
             <Switch
               size="small"
               checked={includePast}
               onChange={(e) => setIncludePast(e.target.checked)}
+              data-testid={eventListTestIds.pastSwitch}
             />
           }
           label="Past"
         />
       </Box>
 
-      <Box sx={{ flex: 1, overflow: "auto", p: 2 }}>
+      <Box
+        sx={{ flex: 1, overflow: "auto", p: 2 }}
+        data-testid={eventListTestIds.eventsContainer}
+      >
         {events?.length === 0 ? (
-          <Box sx={{ textAlign: "center", py: 4 }}>
+          <Box
+            sx={{ textAlign: "center", py: 4 }}
+            data-testid={eventListTestIds.emptyState}
+          >
             <Typography color="text.secondary" variant="body2">
               No events yet
             </Typography>
@@ -87,6 +104,7 @@ export function EventList({ onSelectEvent, onCreateEvent }: EventListProps) {
         aria-label="create event"
         sx={{ position: "absolute", bottom: 16, right: 16 }}
         onClick={onCreateEvent}
+        data-testid={eventListTestIds.createButton}
       >
         <AddIcon />
       </Fab>

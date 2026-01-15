@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { z } from "zod";
 import { ApiError } from "../api";
 import { useAuth } from "../hooks/useAuth";
+import { loginPageTestIds } from "@testIds/loginPageTestIds";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -53,11 +54,18 @@ export function LoginPage() {
 
   return (
     <Box sx={{ width: "100%", maxWidth: 400 }}>
-      <Typography variant="h4" component="h1" gutterBottom textAlign="center">
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        textAlign="center"
+        data-testid={loginPageTestIds.heading}
+      >
         Sign In
       </Typography>
 
       <Typography
+        data-testid={loginPageTestIds.description}
         variant="body2"
         color="text.secondary"
         textAlign="center"
@@ -67,7 +75,11 @@ export function LoginPage() {
       </Typography>
 
       {error && (
-        <Alert severity="error" sx={{ mb: 2 }}>
+        <Alert
+          severity="error"
+          sx={{ mb: 2 }}
+          data-testid={loginPageTestIds.error}
+        >
           {error}
         </Alert>
       )}
@@ -75,6 +87,7 @@ export function LoginPage() {
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <TextField
           {...register("email")}
+          data-testid={loginPageTestIds.email}
           label="Email"
           type="email"
           fullWidth
@@ -86,6 +99,7 @@ export function LoginPage() {
 
         <TextField
           {...register("password")}
+          data-testid={loginPageTestIds.password}
           label="Password"
           type="password"
           fullWidth
@@ -97,6 +111,7 @@ export function LoginPage() {
 
         <Button
           type="submit"
+          data-testid={loginPageTestIds.submitButton}
           variant="contained"
           fullWidth
           size="large"
@@ -108,7 +123,11 @@ export function LoginPage() {
       </Box>
 
       <Typography variant="body2" textAlign="center">
-        <Link to="/" style={{ color: "inherit" }}>
+        <Link
+          to="/"
+          style={{ color: "inherit" }}
+          data-testid={loginPageTestIds.backToHome}
+        >
           Back to home
         </Link>
       </Typography>

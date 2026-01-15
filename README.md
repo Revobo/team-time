@@ -118,3 +118,21 @@ As part of the process, you will be provided access to a Google Drive. All docum
 - **Database**: PostgreSQL with Drizzle ORM
 - **Authentication**: JWT
 - **Deployment**: Docker, fly.io
+- **Testing**: TestCafe
+
+## Running Tests
+
+Ensure the application is running locally (see "Run Locally" above), then:
+
+```bash
+npm install
+npm test
+```
+
+Additional test commands:
+
+```bash
+npm run test:safari    # Run in Safari
+npm run test:all       # Run in Chrome, Safari, and Firefox
+npm run test:debug     # Pause on test failure for debugging
+```

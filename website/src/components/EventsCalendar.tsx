@@ -4,6 +4,7 @@ import { enUS } from "date-fns/locale";
 import { useCallback, useMemo, useState } from "react";
 import { Calendar, dateFnsLocalizer, type View } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import { eventsCalendarTestIds } from "@testIds/eventsCalendarTestids";
 import { useEvents } from "../hooks/useEvents";
 
 const locales = { "en-US": enUS };
@@ -98,7 +99,10 @@ export function EventsCalendar({ onSelectEvent }: EventsCalendarProps) {
   };
 
   return (
-    <Box sx={{ height: "100%", p: 2 }}>
+    <Box
+      sx={{ height: "100%", p: 2 }}
+      data-testid={eventsCalendarTestIds.container}
+    >
       <Calendar
         localizer={localizer}
         events={calendarEvents}

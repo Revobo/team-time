@@ -1,0 +1,18 @@
+export const eventDetailTestIds = {
+	dialog: "event-detail-dialog",
+	title: "event-detail-title",
+	stateChip: "event-detail-state-chip",
+	description: "event-detail-description",
+	createdBy: "event-detail-created-by",
+	proposalsList: "event-detail-proposals-list",
+	proposalItem: "event-detail-proposal-item",
+	proposalDate: "event-detail-proposal-date",
+	proposalProposer: "event-detail-proposal-proposer",
+	upvoteButton: "event-detail-upvote-button",
+	downvoteButton: "event-detail-downvote-button",
+	voteCount: "event-detail-vote-count",
+	selectButton: "event-detail-select-button",
+	selectedChip: "event-detail-selected-chip",
+	proposeTimeButton: "event-detail-propose-time-button",
+	closeButton: "event-detail-close-button",
+};

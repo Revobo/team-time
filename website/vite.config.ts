@@ -1,3 +1,4 @@
+import path from "node:path";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
@@ -7,6 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": "/src",
+      "@testIds": path.resolve(__dirname, "../tests/testIds"),
     },
   },
   server: {

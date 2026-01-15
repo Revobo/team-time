@@ -18,6 +18,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { eventDetailTestIds } from "@testIds/eventDetailTestIds";
 import { useAuth } from "../hooks/useAuth";
 import {
   useDeleteVote,
@@ -83,7 +84,13 @@ export function EventDetail({ eventId, open, onClose }: EventDetailProps) {
 
   return (
     <>
-      <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+      <Dialog
+        open={open}
+        onClose={onClose}
+        maxWidth="sm"
+        fullWidth
+        data-testid={eventDetailTestIds.dialog}
+      >
         <DialogTitle>
           <Box
             sx={{
@@ -92,22 +99,37 @@ export function EventDetail({ eventId, open, onClose }: EventDetailProps) {
               alignItems: "center",
             }}
           >
-            <Typography variant="h6">{event.name}</Typography>
+            <Typography
+              variant="h6"
+              data-testid={eventDetailTestIds.title}
+            >
+              {event.name}
+            </Typography>
             <Chip
               label={isFinalized ? "Finalized" : "Voting"}
               color={isFinalized ? "success" : "primary"}
               size="small"
+              data-testid={eventDetailTestIds.stateChip}
             />
           </Box>
         </DialogTitle>
         <DialogContent>
           {event.description && (
-            <Typography color="text.secondary" sx={{ mb: 2 }}>
+            <Typography
+              color="text.secondary"
+              sx={{ mb: 2 }}
+              data-testid={eventDetailTestIds.description}
+            >
               {event.description}
             </Typography>
           )}
 
-          <Typography variant="caption" color="text.secondary" display="block">
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            display="block"
+            data-testid={eventDetailTestIds.createdBy}
+          >
             Created by {event.creatorName}
           </Typography>
 
@@ -117,7 +139,7 @@ export function EventDetail({ eventId, open, onClose }: EventDetailProps) {
             Proposed Times
           </Typography>
 
-          <List disablePadding>
+          <List disablePadding data-testid={eventDetailTestIds.proposalsList}>
             {event.proposals.map((proposal) => {
               const isWinner = proposal.id === event.finalizedTimeId;
               const netVotes = proposal.upvotes - proposal.downvotes;
@@ -125,6 +147,7 @@ export function EventDetail({ eventId, open, onClose }: EventDetailProps) {
               return (
                 <ListItem
                   key={proposal.id}
+                  data-testid={eventDetailTestIds.proposalItem}
                   sx={{
                     bgcolor: isWinner ? "success.light" : "grey.50",
                     borderRadius: 1,
@@ -144,6 +167,7 @@ export function EventDetail({ eventId, open, onClose }: EventDetailProps) {
                     <ListItemText
                       primary={formatDate(proposal.proposedAt)}
                       secondary={`Proposed by ${proposal.proposerName}`}
+                      data-testid={eventDetailTestIds.proposalDate}
                     />
                     {isWinner && (
                       <Chip
@@ -151,6 +175,7 @@ export function EventDetail({ eventId, open, onClose }: EventDetailProps) {
                         label="Selected"
                         color="success"
                         size="small"
+                        data-testid={eventDetailTestIds.selectedChip}
                       />
                     )}
                   </Box>
@@ -175,6 +200,7 @@ export function EventDetail({ eventId, open, onClose }: EventDetailProps) {
                               ? handleRemoveVote(proposal.id)
                               : handleVote(proposal.id, 1)
                           }
+                          data-testid={eventDetailTestIds.upvoteButton}
                         >
                           <ThumbUpIcon fontSize="small" />
                         </IconButton>
@@ -186,6 +212,7 @@ export function EventDetail({ eventId, open, onClose }: EventDetailProps) {
                               ? handleRemoveVote(proposal.id)
                               : handleVote(proposal.id, -1)
                           }
+                          data-testid={eventDetailTestIds.downvoteButton}
                         >
                           <ThumbDownIcon fontSize="small" />
                         </IconButton>
@@ -193,6 +220,7 @@ export function EventDetail({ eventId, open, onClose }: EventDetailProps) {
                     )}
                     <Typography
                       variant="body2"
+                      data-testid={eventDetailTestIds.voteCount}
                       color={
                         netVotes > 0
                           ? "success.main"
@@ -214,6 +242,7 @@ export function EventDetail({ eventId, open, onClose }: EventDetailProps) {
                         sx={{ ml: "auto" }}
                         onClick={() => handleFinalize(proposal.id)}
                         disabled={finalizeMutation.isPending}
+                        data-testid={eventDetailTestIds.selectButton}
                       >
                         Select
                       </Button>
@@ -226,11 +255,19 @@ export function EventDetail({ eventId, open, onClose }: EventDetailProps) {
         </DialogContent>
         <DialogActions>
           {!isFinalized && (
-            <Button onClick={() => setProposeDialogOpen(true)}>
+            <Button
+              onClick={() => setProposeDialogOpen(true)}
+              data-testid={eventDetailTestIds.proposeTimeButton}
+            >
               Propose Time
             </Button>
           )}
-          <Button onClick={onClose}>Close</Button>
+          <Button
+            onClick={onClose}
+            data-testid={eventDetailTestIds.closeButton}
+          >
+            Close
+          </Button>
         </DialogActions>
       </Dialog>
 

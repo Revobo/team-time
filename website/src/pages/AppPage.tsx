@@ -1,6 +1,7 @@
 import LogoutIcon from "@mui/icons-material/Logout";
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import { useState } from "react";
+import { appPageTestIds } from "@testIds/appPageTestIds";
 import { CreateEventDialog } from "../components/CreateEventDialog";
 import { EventDetail } from "../components/EventDetail";
 import { EventList } from "../components/EventList";
@@ -19,10 +20,19 @@ export function AppPage() {
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             Team Time
           </Typography>
-          <Typography variant="body2" sx={{ mr: 2 }}>
+          <Typography
+            variant="body2"
+            sx={{ mr: 2 }}
+            data-testid={appPageTestIds.userName}
+          >
             {user?.name}
           </Typography>
-          <IconButton color="inherit" onClick={logout} title="Sign out">
+          <IconButton
+            color="inherit"
+            onClick={logout}
+            title="Sign out"
+            data-testid={appPageTestIds.logoutButton}
+          >
             <LogoutIcon />
           </IconButton>
         </Toolbar>

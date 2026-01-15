@@ -10,6 +10,9 @@
     "build": "tsc -b && vite build --config website/vite.config.ts",
     "build:server": "tsc -p server/tsconfig.build.json",
     "start": "node dist/server/index.js",
+    "test": "testcafe chrome tests/ --headed",
+    "test:all": "testcafe chrome,safari,firefox tests/ --headed",
+    "test:debug": "testcafe chrome tests/ --headed --debug-on-fail",
     "preview": "vite preview --config website/vite.config.ts",
     "lint": "biome lint --write .",
     "lint:check": "biome lint .",
@@ -60,6 +63,7 @@
     "@vitejs/plugin-react": "^4.5.2",
     "concurrently": "^9.1.2",
     "drizzle-kit": "^0.31.4",
+    "testcafe": "^3.7.3",
     "tsx": "^4.20.3",
     "typescript": "~5.8.3",
     "vite": "^6.3.5"
