@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "docker compose up -d && trap 'docker compose stop' EXIT && concurrently \"npm run dev:website\" \"npm run dev:server\"",
+    "dev": "docker compose up -d && concurrently \"npm run dev:website\" \"npm run dev:server\"",
+    "dev:stop": "docker compose stop",
     "dev:website": "vite --config website/vite.config.ts",
     "dev:server": "tsx watch server/index.ts",
     "build": "tsc -b && vite build --config website/vite.config.ts",
@@ -21,8 +22,8 @@
     "drizzle:generate": "npx drizzle-kit generate",
     "drizzle:migrate": "npx drizzle-kit migrate",
     "drizzle:drop": "npx drizzle-kit drop",
-    "drizzle:seed": "docker exec -i postgres-team-time psql -U postgres -d team_time < server/db/seed.sql",
-    "drizzle:unseed": "docker exec -i postgres-team-time psql -U postgres -d team_time < server/db/unseed.sql",
+    "drizzle:seed": "docker exec postgres-team-time psql -U postgres -d team_time -f /sql/seed.sql",
+    "drizzle:unseed": "docker exec postgres-team-time psql -U postgres -d team_time -f /sql/unseed.sql",
     "fly:deploy": "fly deploy -c deploy/fly.toml"
   },
   "dependencies": {
