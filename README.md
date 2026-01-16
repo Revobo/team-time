@@ -24,7 +24,7 @@ git clone https://github.com/Revobo/team-time.git
 cd team-time
 
 # Create env file
-cp .env.docker.template .env
+cp .env.docker.template .env # on windows: copy .env.docker.template .env
 
 # Start the database
 docker compose up -d
